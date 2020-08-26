@@ -15,9 +15,9 @@ public class PokerHands {
     public String play(List<String> whiteCards, List<String> blackCards) {
         CardType whiteCardType = generateCarType(whiteCards);
         CardType blackCarType = generateCarType(blackCards);
-        if (whiteCardType.getCarType() > blackCarType.getCarType()) {
+        if (whiteCardType.getCardType() > blackCarType.getCardType()) {
             return WHITE;
-        } else if (whiteCardType.getCarType() < blackCarType.getCarType()) {
+        } else if (whiteCardType.getCardType() < blackCarType.getCardType()) {
             return BLACK;
         }
 
