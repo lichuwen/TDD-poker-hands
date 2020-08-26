@@ -149,10 +149,22 @@ public class PokerHandsTest {
     }
 
     @Test
-    void should_return_white_when_play_card_with_two_pair_given_3H3D3D5S9CKD_and_4H4D4D5S9C() {
+    void should_return_white_when_play_card_with_three_of_a_kind_given_3H3D3D5S9CKD_and_4H4D4D5S9C() {
         //given
         String white = "3H 3D 3D 9C KD";
         String black = "4H 4D 4D 5S 9C";
+        //when
+        String result = pokerHands.play(Arrays.asList(white.split(" ")),
+                Arrays.asList(black.split(" ")));
+        //then
+        assertEquals(result, PokerHands.BLACK);
+    }
+
+    @Test
+    void should_return_white_when_play_card_with_straight_given_3H4D5S6C7D_and_4H5D6S7C8D() {
+        //given
+        String white = "3H 4D 5S 6C 7D";
+        String black = "4H 5D 6S 7C 8D";
         //when
         String result = pokerHands.play(Arrays.asList(white.split(" ")),
                 Arrays.asList(black.split(" ")));
