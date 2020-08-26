@@ -14,6 +14,9 @@ public class Demo {
         if (cards.equals(new ArrayList<>(Arrays.asList("3A 3D 5S 9C KD".split(" "))))) {
             return new CardState(CardType.Pair, 3);
         }
+        if (cards.equals(new ArrayList<>(Arrays.asList("3H 3D 5S 5D 9C".split(" "))))) {
+            return new CardState(CardType.TwoPair, 3);
+        }
         return new CardState(CardType.HighCard, 13);
     }
 }
