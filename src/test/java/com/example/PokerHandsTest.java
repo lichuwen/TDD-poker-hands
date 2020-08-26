@@ -125,7 +125,7 @@ public class PokerHandsTest {
     }
 
     @Test
-    void should_return_white_when_play_card_with_pair_given_3H3D5S9CKD_and_4H4D5S9CKD() {
+    void should_return_black_when_play_card_with_pair_given_3H3D5S9CKD_and_4H4D5S9CKD() {
         //given
         String white = "3H 3D 5S 9C KD";
         String black = "4H 4D 5S 9C KD";
@@ -137,7 +137,7 @@ public class PokerHandsTest {
     }
 
     @Test
-    void should_return_white_when_play_card_with_two_pair_given_3H3D5D9CKD_and_3H3D6S6C9C() {
+    void should_return_black_when_play_card_with_two_pair_given_3H3D5D9CKD_and_3H3D6S6C9C() {
         //given
         String white = "3H 3D 5D 9C KD";
         String black = "3H 3D 6S 6C 9C";
@@ -149,7 +149,7 @@ public class PokerHandsTest {
     }
 
     @Test
-    void should_return_white_when_play_card_with_three_of_a_kind_given_3H3D3D5S9CKD_and_4H4D4D5S9C() {
+    void should_return_black_when_play_card_with_three_of_a_kind_given_3H3D3D5S9CKD_and_4H4D4D5S9C() {
         //given
         String white = "3H 3D 3D 9C KD";
         String black = "4H 4D 4D 5S 9C";
@@ -161,7 +161,7 @@ public class PokerHandsTest {
     }
 
     @Test
-    void should_return_white_when_play_card_with_straight_given_3H4D5S6C7D_and_4H5D6S7C8D() {
+    void should_return_black_when_play_card_with_straight_given_3H4D5S6C7D_and_4H5D6S7C8D() {
         //given
         String white = "3H 4D 5S 6C 7D";
         String black = "4H 5D 6S 7C 8D";
@@ -173,7 +173,7 @@ public class PokerHandsTest {
     }
 
     @Test
-    void should_return_white_when_play_card_with_flush_given_2H3H5H9HKH_and_2S3S5S9SAS() {
+    void should_return_black_when_play_card_with_flush_given_2H3H5H9HKH_and_2S3S5S9SAS() {
         //given
         String white = "2H 3H 5H 9H KH";
         String black = "2S 3S 5S 9S AS";
@@ -185,7 +185,7 @@ public class PokerHandsTest {
     }
 
     @Test
-    void should_return_white_when_play_card_with_full_house_given_3H3D5S5C3D_and_4H4D4D3S3C() {
+    void should_return_black_when_play_card_with_full_house_given_3H3D5S5C3D_and_4H4D4D3S3C() {
         //given
         String white = "3H 3D 5S 5C 3D";
         String black = "4H 4D 4D 3S 3C";
@@ -197,7 +197,7 @@ public class PokerHandsTest {
     }
 
     @Test
-    void should_return_white_when_play_card_with_four_of_a_kind_given_3H3D3S3D5C_and_4H4D4S4D3C() {
+    void should_return_black_when_play_card_with_four_of_a_kind_given_3H3D3S3D5C_and_4H4D4S4D3C() {
         //given
         String white = "3H 3D 3S 3D 5C";
         String black = "4H 4D 4S 4D 3C";
@@ -209,7 +209,7 @@ public class PokerHandsTest {
     }
 
     @Test
-    void should_return_white_when_play_card_with_straight_flush_given_3H4H5H6H7H_and_4H5H6H7H8H() {
+    void should_return_black_when_play_card_with_straight_flush_given_3H4H5H6H7H_and_4H5H6H7H8H() {
         //given
         String white = "3H 4H 5H 6H 7H";
         String black = "4H 5H 6H 7H 8H";
@@ -218,6 +218,18 @@ public class PokerHandsTest {
                 Arrays.asList(black.split(" ")));
         //then
         assertEquals(result, PokerHands.BLACK);
+    }
+
+    @Test
+    void should_return_white_when_play_card_with_different_type_given_3H4H5H6H7H_and_4H5D6S7C8D() {
+        //given
+        String white = "3H 4H 5H 6H 7H";
+        String black = "4H 5D 6S 7C 8D";
+        //when
+        String result = pokerHands.play(Arrays.asList(white.split(" ")),
+                Arrays.asList(black.split(" ")));
+        //then
+        assertEquals(result, PokerHands.WHITE);
     }
 
 }
