@@ -27,10 +27,9 @@ public class DemoTest {
         //given
         String cards = "2H 3D 5S 9C KD";
         //when
-        CardState cardState = demo.generateCarType(Arrays.asList(cards.split(" ")));
+        CardType cardType = demo.generateCarType(Arrays.asList(cards.split(" ")));
         //then
-        assertEquals(cardState.cardType, CardType.HighCard);
-        assertEquals(cardState.biggestNumber, 13);
+        assertEquals(cardType, CardType.HighCard);
     }
 
     @Test
@@ -38,10 +37,9 @@ public class DemoTest {
         //given
         String cards = "3A 3D 5S 9C KD";
         //when
-        CardState cardState = demo.generateCarType(Arrays.asList(cards.split(" ")));
+        CardType cardType = demo.generateCarType(Arrays.asList(cards.split(" ")));
         //then
-        assertEquals(cardState.cardType, CardType.Pair);
-        assertEquals(cardState.biggestNumber, 3);
+        assertEquals(cardType, CardType.Pair);
     }
 
     @Test
@@ -49,10 +47,9 @@ public class DemoTest {
         //given
         String cards = "3H 3D 5S 5D 9C";
         //when
-        CardState cardState = demo.generateCarType(Arrays.asList(cards.split(" ")));
+        CardType cardType = demo.generateCarType(Arrays.asList(cards.split(" ")));
         //then
-        assertEquals(cardState.cardType, CardType.TwoPair);
-        assertEquals(cardState.biggestNumber, 3);
+        assertEquals(cardType, CardType.TwoPair);
     }
 
     @Test
@@ -60,9 +57,8 @@ public class DemoTest {
         //given
         String cards = "3H 3D 3D 5S 9C";
         //when
-        CardState cardState = demo.generateCarType(Arrays.asList(cards.split(" ")));
+        CardType cardType = demo.generateCarType(Arrays.asList(cards.split(" ")));
         //then
-        assertEquals(cardState.cardType, CardType.ThreeOfAKind);
-        assertEquals(cardState.biggestNumber, 3);
+        assertEquals(cardType, CardType.ThreeOfAKind);
     }
 }
