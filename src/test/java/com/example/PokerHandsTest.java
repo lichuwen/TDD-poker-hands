@@ -112,5 +112,17 @@ public class PokerHandsTest {
         assertEquals(cardType, CardType.StraightFlush);
     }
 
+    @Test
+    void should_return_white_when_play_card_type_given_2H3D5S9CKD_and_2C3H4S8CAH() {
+        //given
+        String white = "2H 3D 5S 9C KD";
+        String black = "2C 3H 4S 8C AH";
+        //when
+        String result = pokerHands.play(Arrays.asList(white.split(" ")),
+                Arrays.asList(black.split(" ")));
+        //then
+        assertEquals(result, PokerHands.WHITE);
+    }
+
 
 }
