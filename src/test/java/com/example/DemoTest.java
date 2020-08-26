@@ -72,5 +72,15 @@ public class DemoTest {
         assertEquals(cardType, CardType.Straight);
     }
 
+    @Test
+    void should_return_correct_card_state_when_generate_car_type_given_2H3H5H9HKH() {
+        //given
+        String cards = "2H 3H 5H 9H KH";
+        //when
+        CardType cardType = demo.generateCarType(Arrays.asList(cards.split(" ")));
+        //then
+        assertEquals(cardType, CardType.Flush);
+    }
+
 
 }
