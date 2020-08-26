@@ -184,4 +184,16 @@ public class PokerHandsTest {
         assertEquals(result, PokerHands.BLACK);
     }
 
+    @Test
+    void should_return_white_when_play_card_with_full_house_given_3H3D5S5C3D_and_4H4D4D3S3C() {
+        //given
+        String white = "3H 3D 5S 5C 3D";
+        String black = "4H 4D 4D 3S 3C";
+        //when
+        String result = pokerHands.play(Arrays.asList(white.split(" ")),
+                Arrays.asList(black.split(" ")));
+        //then
+        assertEquals(result, PokerHands.BLACK);
+    }
+
 }
