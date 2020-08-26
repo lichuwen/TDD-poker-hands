@@ -2,7 +2,7 @@ package com.example;
 
 import java.util.*;
 
-public class Demo {
+public class PokerHands {
 
     public String run() {
         return "ABC";

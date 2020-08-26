@@ -8,17 +8,17 @@ import java.util.Arrays;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class DemoTest {
-    private static Demo demo;
+public class PokerHandsTest {
+    private static PokerHands pokerHands;
 
     @BeforeAll
     public static void setUp() throws Exception {
-        demo = new Demo();
+        pokerHands = new PokerHands();
     }
 
     @Test
     public void test01() {
-        String result = demo.run();
+        String result = pokerHands.run();
         assertThat(result).isEqualTo("ABC");
     }
 
@@ -27,7 +27,7 @@ public class DemoTest {
         //given
         String cards = "2H 3D 5S 9C KD";
         //when
-        CardType cardType = demo.generateCarType(Arrays.asList(cards.split(" ")));
+        CardType cardType = pokerHands.generateCarType(Arrays.asList(cards.split(" ")));
         //then
         assertEquals(cardType, CardType.HighCard);
     }
@@ -37,7 +37,7 @@ public class DemoTest {
         //given
         String cards = "3A 3D 5S 9C KD";
         //when
-        CardType cardType = demo.generateCarType(Arrays.asList(cards.split(" ")));
+        CardType cardType = pokerHands.generateCarType(Arrays.asList(cards.split(" ")));
         //then
         assertEquals(cardType, CardType.Pair);
     }
@@ -47,7 +47,7 @@ public class DemoTest {
         //given
         String cards = "3H 3D 5S 5D 9C";
         //when
-        CardType cardType = demo.generateCarType(Arrays.asList(cards.split(" ")));
+        CardType cardType = pokerHands.generateCarType(Arrays.asList(cards.split(" ")));
         //then
         assertEquals(cardType, CardType.TwoPair);
     }
@@ -57,7 +57,7 @@ public class DemoTest {
         //given
         String cards = "3H 3D 3D 5S 9C";
         //when
-        CardType cardType = demo.generateCarType(Arrays.asList(cards.split(" ")));
+        CardType cardType = pokerHands.generateCarType(Arrays.asList(cards.split(" ")));
         //then
         assertEquals(cardType, CardType.ThreeOfAKind);
     }
@@ -67,7 +67,7 @@ public class DemoTest {
         //given
         String cards = "3H 4D 5S 6C 7D";
         //when
-        CardType cardType = demo.generateCarType(Arrays.asList(cards.split(" ")));
+        CardType cardType = pokerHands.generateCarType(Arrays.asList(cards.split(" ")));
         //then
         assertEquals(cardType, CardType.Straight);
     }
@@ -77,7 +77,7 @@ public class DemoTest {
         //given
         String cards = "2H 3H 5H 9H KH";
         //when
-        CardType cardType = demo.generateCarType(Arrays.asList(cards.split(" ")));
+        CardType cardType = pokerHands.generateCarType(Arrays.asList(cards.split(" ")));
         //then
         assertEquals(cardType, CardType.Flush);
     }
@@ -87,7 +87,7 @@ public class DemoTest {
         //given
         String cards = "3H 3D 5S 5C 3D";
         //when
-        CardType cardType = demo.generateCarType(Arrays.asList(cards.split(" ")));
+        CardType cardType = pokerHands.generateCarType(Arrays.asList(cards.split(" ")));
         //then
         assertEquals(cardType, CardType.FullHouse);
     }
@@ -97,7 +97,7 @@ public class DemoTest {
         //given
         String cards = "3H 3D 3S 3D 5C";
         //when
-        CardType cardType = demo.generateCarType(Arrays.asList(cards.split(" ")));
+        CardType cardType = pokerHands.generateCarType(Arrays.asList(cards.split(" ")));
         //then
         assertEquals(cardType, CardType.FourOfAKind);
     }
@@ -107,7 +107,7 @@ public class DemoTest {
         //given
         String cards = "3H 4H 5H 6H 7H";
         //when
-        CardType cardType = demo.generateCarType(Arrays.asList(cards.split(" ")));
+        CardType cardType = pokerHands.generateCarType(Arrays.asList(cards.split(" ")));
         //then
         assertEquals(cardType, CardType.StraightFlush);
     }
