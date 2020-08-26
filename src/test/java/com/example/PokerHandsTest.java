@@ -136,5 +136,17 @@ public class PokerHandsTest {
         assertEquals(result, PokerHands.BLACK);
     }
 
+    @Test
+    void should_return_white_when_play_card_with_two_pair_given_3H3D5D9CKD_and_3H3D6S6C9C() {
+        //given
+        String white = "3H 3D 5D 9C KD";
+        String black = "3H 3D 6S 6C 9C";
+        //when
+        String result = pokerHands.play(Arrays.asList(white.split(" ")),
+                Arrays.asList(black.split(" ")));
+        //then
+        assertEquals(result, PokerHands.BLACK);
+    }
+
 
 }
