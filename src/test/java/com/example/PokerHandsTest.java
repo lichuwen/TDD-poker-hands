@@ -208,4 +208,16 @@ public class PokerHandsTest {
         assertEquals(result, PokerHands.BLACK);
     }
 
+    @Test
+    void should_return_white_when_play_card_with_straight_flush_given_3H4H5H6H7H_and_4H5H6H7H8H() {
+        //given
+        String white = "3H 4H 5H 6H 7H";
+        String black = "4H 5H 6H 7H 8H";
+        //when
+        String result = pokerHands.play(Arrays.asList(white.split(" ")),
+                Arrays.asList(black.split(" ")));
+        //then
+        assertEquals(result, PokerHands.BLACK);
+    }
+
 }
