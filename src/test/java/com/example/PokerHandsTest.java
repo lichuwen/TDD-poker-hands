@@ -113,7 +113,7 @@ public class PokerHandsTest {
     }
 
     @Test
-    void should_return_white_when_play_card_type_given_2H3D5S9CKD_and_2C3H4S8CAH() {
+    void should_return_white_when_play_card_with_high_card_given_2H3D5S9CKD_and_2C3H4S8CAH() {
         //given
         String white = "2H 3D 5S 9C KD";
         String black = "2C 3H 4S 8C AH";
@@ -122,6 +122,18 @@ public class PokerHandsTest {
                 Arrays.asList(black.split(" ")));
         //then
         assertEquals(result, PokerHands.WHITE);
+    }
+
+    @Test
+    void should_return_white_when_play_card_with_pair_given_3H3D5S9CKD_and_4H4D5S9CKD() {
+        //given
+        String white = "3H 3D 5S 9C KD";
+        String black = "4H 4D 5S 9C KD";
+        //when
+        String result = pokerHands.play(Arrays.asList(white.split(" ")),
+                Arrays.asList(black.split(" ")));
+        //then
+        assertEquals(result, PokerHands.BLACK);
     }
 
 
