@@ -43,4 +43,15 @@ public class DemoTest {
         assertEquals(cardState.cardType, CardType.Pair);
         assertEquals(cardState.biggestNumber, 3);
     }
+
+    @Test
+    void should_return_correct_card_state_when_generate_car_type_given_3H3D5S5D9C() {
+        //given
+        String cards = "3H 3D 5S 5D 9C";
+        //when
+        CardState cardState = demo.generateCarType(Arrays.asList(cards.split(" ")));
+        //then
+        assertEquals(cardState.cardType, CardType.TwoPair);
+        assertEquals(cardState.biggestNumber, 3);
+    }
 }
