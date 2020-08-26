@@ -3,6 +3,8 @@ package com.example;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -25,7 +27,7 @@ public class DemoTest {
         //given
         String cards = "2H 3D 5S 9C KD";
         //when
-        CardState cardState = demo.generateCarType(cards.split(" "));
+        CardState cardState = demo.generateCarType(Arrays.asList(cards.split(" ")));
         //then
         assertEquals(cardState.cardType, CardType.HighCard);
         assertEquals(cardState.biggestNumber, 13);
@@ -36,7 +38,7 @@ public class DemoTest {
         //given
         String cards = "3A 3D 5S 9C KD";
         //when
-        CardState cardState = demo.generateCarType(cards.split(" "));
+        CardState cardState = demo.generateCarType(Arrays.asList(cards.split(" ")));
         //then
         assertEquals(cardState.cardType, CardType.Pair);
         assertEquals(cardState.biggestNumber, 3);
