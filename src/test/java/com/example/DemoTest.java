@@ -61,4 +61,16 @@ public class DemoTest {
         //then
         assertEquals(cardType, CardType.ThreeOfAKind);
     }
+
+    @Test
+    void should_return_correct_card_state_when_generate_car_type_given_3H4D5S6C7D() {
+        //given
+        String cards = "3H 4D 5S 6C 7D";
+        //when
+        CardType cardType = demo.generateCarType(Arrays.asList(cards.split(" ")));
+        //then
+        assertEquals(cardType, CardType.Straight);
+    }
+
+
 }
