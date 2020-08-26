@@ -232,4 +232,16 @@ public class PokerHandsTest {
         assertEquals(result, PokerHands.WHITE);
     }
 
+    @Test
+    void should_return_tie_when_play_card_with_different_type_given_2H3D5S9CKD_and_2D3H5C9SKH() {
+        //given
+        String white = "2H 3D 5S 9C KD";
+        String black = "2D 3H 5C 9S KH";
+        //when
+        String result = pokerHands.play(Arrays.asList(white.split(" ")),
+                Arrays.asList(black.split(" ")));
+        //then
+        assertEquals(result, PokerHands.TIE);
+    }
+
 }
