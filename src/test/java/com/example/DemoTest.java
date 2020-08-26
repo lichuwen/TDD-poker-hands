@@ -92,5 +92,15 @@ public class DemoTest {
         assertEquals(cardType, CardType.FullHouse);
     }
 
+    @Test
+    void should_return_correct_card_state_when_generate_car_type_given_3H3D3S3D5C() {
+        //given
+        String cards = "3H 3D 3S 3D 5C";
+        //when
+        CardType cardType = demo.generateCarType(Arrays.asList(cards.split(" ")));
+        //then
+        assertEquals(cardType, CardType.FourOfAKind);
+    }
+
 
 }
