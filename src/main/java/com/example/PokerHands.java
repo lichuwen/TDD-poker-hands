@@ -4,12 +4,69 @@ import java.util.*;
 
 public class PokerHands {
 
+    public static final String WHITE = "white";
+    public static final String BLACK = "black";
+    public static final String TIE = "Tie";
+
     public String run() {
         return "ABC";
     }
 
+    public String play(List<String> whiteCards, List<String> blackCards) {
+        CardType whiteCardType = generateCarType(whiteCards);
+        CardType blackCarType = generateCarType(blackCards);
+        if (whiteCardType.getCarType() > blackCarType.getCarType()) {
+            return WHITE;
+        } else if (whiteCardType.getCarType() < blackCarType.getCarType()) {
+            return BLACK;
+        }
+
+        List<Integer> whiteCardNum = new ArrayList<>();
+        for (String whiteCard : whiteCards) {
+            whiteCardNum.add(transformToNumber(whiteCard.charAt(0)));
+        }
+        List<Integer> blackCardNum = new ArrayList<>();
+        for (String blackCard : blackCards) {
+            blackCardNum.add(transformToNumber(blackCard.charAt(0)));
+        }
+        Collections.sort(whiteCardNum);
+        Collections.sort(blackCardNum);
+        List<Map.Entry<Integer, Integer>> whiteNumberList = generateCardMap(whiteCardNum);
+        List<Map.Entry<Integer, Integer>> blackNumberList = generateCardMap(blackCardNum);
+        whiteNumberList.sort((o1, o2) -> o2.getValue().compareTo(o1.getValue()));
+        blackNumberList.sort((o1, o2) -> o2.getValue().compareTo(o1.getValue()));
+
+        StringBuilder whiteNum = new StringBuilder();
+        StringBuilder blackNum = new StringBuilder();
+        for (Map.Entry<Integer, Integer> entry : whiteNumberList) {
+            whiteNum.append(entry.getKey());
+        }
+        for (Map.Entry<Integer, Integer> entry : blackNumberList) {
+            blackNum.append(entry.getKey());
+        }
+        int compareResult = whiteNum.toString().compareTo(blackNum.toString());
+        if (compareResult > 0) {
+            return WHITE;
+        } else if (compareResult < 0) {
+            return BLACK;
+        } else {
+            return TIE;
+        }
+    }
+
+    private List<Map.Entry<Integer, Integer>> generateCardMap(List<Integer> CardNum) {
+        Map<Integer, Integer> whiteNumbers = new HashMap<>(6);
+        for (Integer integer : CardNum) {
+            if (whiteNumbers.containsKey(integer)) {
+                whiteNumbers.put(integer, whiteNumbers.get(integer) + 1);
+            } else {
+                whiteNumbers.put(integer, 1);
+            }
+        }
+        return new ArrayList<>(whiteNumbers.entrySet());
+    }
+
     public CardType generateCarType(List<String> cards) {
-        int biggestNumber = calculateBiggestNumber(cards);
         if (checkStraight(cards)) {
             for (int i = 0; i < cards.size() - 1; i++) {
                 if (cards.get(i).charAt(1) != cards.get(i + 1).charAt(1)) {
@@ -18,15 +75,7 @@ public class PokerHands {
             }
             return CardType.StraightFlush;
         }
-        Map<Character, Integer> counts = new HashMap<>(5);
-        for (String card : cards) {
-            char cardNumber = card.charAt(0);
-            if (counts.containsKey(cardNumber)) {
-                counts.put(cardNumber, counts.get(cardNumber) + 1);
-            } else {
-                counts.put(cardNumber, 1);
-            }
-        }
+        Map<Character, Integer> counts = calculateCounts(cards);
         for (Map.Entry<Character, Integer> entry : counts.entrySet()) {
             if (entry.getValue() == 4) {
                 return CardType.FourOfAKind;
@@ -57,6 +106,19 @@ public class PokerHands {
         return CardType.Pair;
     }
 
+    public Map<Character, Integer> calculateCounts(List<String> cards) {
+        Map<Character, Integer> counts = new HashMap<>(5);
+        for (String card : cards) {
+            char cardNumber = card.charAt(0);
+            if (counts.containsKey(cardNumber)) {
+                counts.put(cardNumber, counts.get(cardNumber) + 1);
+            } else {
+                counts.put(cardNumber, 1);
+            }
+        }
+        return counts;
+    }
+
     public boolean checkStraight(List<String> cards) {
         List<Integer> cardNumbers = new ArrayList<>();
         for (String card : cards) {
@@ -70,15 +132,6 @@ public class PokerHands {
             }
         }
         return true;
-    }
-
-    public int calculateBiggestNumber(List<String> cards) {
-        int maxNumber = 0;
-        for (String card : cards) {
-            int cardNumber = transformToNumber(card.charAt(0));
-            maxNumber = Math.max(cardNumber, maxNumber);
-        }
-        return maxNumber;
     }
 
     public int transformToNumber(char character) {

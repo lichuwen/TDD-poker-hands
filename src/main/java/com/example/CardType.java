@@ -12,11 +12,11 @@ public enum CardType {
     StraightFlush(9);
     private final int type;
 
-    private int getCarType() {
+    public int getCarType() {
         return this.type;
     }
 
-    private CardType(int type) {
+    CardType(int type) {
         this.type = type;
     }
 
