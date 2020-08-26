@@ -102,5 +102,15 @@ public class DemoTest {
         assertEquals(cardType, CardType.FourOfAKind);
     }
 
+    @Test
+    void should_return_correct_card_state_when_generate_car_type_given_3H4H5H6H7H() {
+        //given
+        String cards = "3H 4H 5H 6H 7H";
+        //when
+        CardType cardType = demo.generateCarType(Arrays.asList(cards.split(" ")));
+        //then
+        assertEquals(cardType, CardType.StraightFlush);
+    }
+
 
 }
