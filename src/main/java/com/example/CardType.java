@@ -1,6 +1,11 @@
 package com.example;
 
+/**
+ * @author xhz
+ */
+
 public enum CardType {
+    //use for type of five cards
     HighCard(1),
     Pair(2),
     TwoPair(3),

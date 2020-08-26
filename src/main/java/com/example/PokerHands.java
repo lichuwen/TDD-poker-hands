@@ -1,12 +1,20 @@
 package com.example;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
+/**
+ * @author xhz
+ */
 public class PokerHands {
 
     public static final String WHITE = "white";
     public static final String BLACK = "black";
     public static final String TIE = "Tie";
+    public static final int TWO_PAIR_SIZE = 3;
+    public static final int HIGH_CARD_SIZE = 5;
 
     public String run() {
         return "ABC";
@@ -20,31 +28,17 @@ public class PokerHands {
         } else if (whiteCardType.getCardType() < blackCarType.getCardType()) {
             return BLACK;
         }
-
-        List<Integer> whiteCardNum = new ArrayList<>();
-        for (String whiteCard : whiteCards) {
-            whiteCardNum.add(transformToNumber(whiteCard.charAt(0)));
-        }
-        List<Integer> blackCardNum = new ArrayList<>();
-        for (String blackCard : blackCards) {
-            blackCardNum.add(transformToNumber(blackCard.charAt(0)));
-        }
-        Collections.sort(whiteCardNum);
-        Collections.sort(blackCardNum);
-        List<Map.Entry<Integer, Integer>> whiteNumberList = generateCardMap(whiteCardNum);
-        List<Map.Entry<Integer, Integer>> blackNumberList = generateCardMap(blackCardNum);
+        List<Integer> whiteCardNum = generateCardNumberList(whiteCards);
+        List<Integer> blackCardNum = generateCardNumberList(blackCards);
+        List<Map.Entry<Integer, Long>> whiteNumberList = generateCardMap(whiteCardNum);
+        List<Map.Entry<Integer, Long>> blackNumberList = generateCardMap(blackCardNum);
         whiteNumberList.sort((o1, o2) -> o2.getValue().compareTo(o1.getValue()));
         blackNumberList.sort((o1, o2) -> o2.getValue().compareTo(o1.getValue()));
-
-        StringBuilder whiteNum = new StringBuilder();
-        StringBuilder blackNum = new StringBuilder();
-        for (Map.Entry<Integer, Integer> entry : whiteNumberList) {
-            whiteNum.append(entry.getKey());
-        }
-        for (Map.Entry<Integer, Integer> entry : blackNumberList) {
-            blackNum.append(entry.getKey());
-        }
-        int compareResult = whiteNum.toString().compareTo(blackNum.toString());
+        String whiteNum = whiteNumberList.stream().map(Map.Entry::getKey)
+                .map(String::valueOf).collect(Collectors.joining(""));
+        String blackNum = blackNumberList.stream().map(Map.Entry::getKey)
+                .map(String::valueOf).collect(Collectors.joining(""));
+        int compareResult = whiteNum.compareTo(blackNum);
         if (compareResult > 0) {
             return WHITE;
         } else if (compareResult < 0) {
@@ -54,16 +48,13 @@ public class PokerHands {
         }
     }
 
-    private List<Map.Entry<Integer, Integer>> generateCardMap(List<Integer> CardNum) {
-        Map<Integer, Integer> whiteNumbers = new HashMap<>(6);
-        for (Integer integer : CardNum) {
-            if (whiteNumbers.containsKey(integer)) {
-                whiteNumbers.put(integer, whiteNumbers.get(integer) + 1);
-            } else {
-                whiteNumbers.put(integer, 1);
-            }
-        }
-        return new ArrayList<>(whiteNumbers.entrySet());
+    private List<Integer> generateCardNumberList(List<String> cards) {
+        return cards.stream().map(card -> transformToNumber(card.charAt(0))).collect(Collectors.toList());
+    }
+
+    private List<Map.Entry<Integer, Long>> generateCardMap(List<Integer> cardNum) {
+        return new ArrayList<>(cardNum.stream()
+                .collect(Collectors.groupingBy(card -> card, Collectors.counting())).entrySet());
     }
 
     public CardType generateCarType(List<String> cards) {
@@ -75,8 +66,8 @@ public class PokerHands {
             }
             return CardType.StraightFlush;
         }
-        Map<Character, Integer> counts = calculateCounts(cards);
-        for (Map.Entry<Character, Integer> entry : counts.entrySet()) {
+        Map<Character, Long> counts = calculateCounts(cards);
+        for (Map.Entry<Character, Long> entry : counts.entrySet()) {
             if (entry.getValue() == 4) {
                 return CardType.FourOfAKind;
             }
@@ -92,39 +83,28 @@ public class PokerHands {
         for (int i = 0; i < cards.size() - 1; i++) {
             if (cards.get(i).charAt(1) != cards.get(i + 1).charAt(1)) {
                 flush = false;
+                break;
             }
         }
         if (flush) {
             return CardType.Flush;
         }
-        if (counts.size() == 3) {
+        if (counts.size() == TWO_PAIR_SIZE) {
             return CardType.TwoPair;
         }
-        if (counts.size() == 5) {
+        if (counts.size() == HIGH_CARD_SIZE) {
             return CardType.HighCard;
         }
         return CardType.Pair;
     }
 
-    public Map<Character, Integer> calculateCounts(List<String> cards) {
-        Map<Character, Integer> counts = new HashMap<>(5);
-        for (String card : cards) {
-            char cardNumber = card.charAt(0);
-            if (counts.containsKey(cardNumber)) {
-                counts.put(cardNumber, counts.get(cardNumber) + 1);
-            } else {
-                counts.put(cardNumber, 1);
-            }
-        }
-        return counts;
+    public Map<Character, Long> calculateCounts(List<String> cards) {
+        return cards.stream().collect(Collectors.groupingBy(card -> card.charAt(0), Collectors.counting()));
     }
 
     public boolean checkStraight(List<String> cards) {
-        List<Integer> cardNumbers = new ArrayList<>();
-        for (String card : cards) {
-            cardNumbers.add(transformToNumber(card.charAt(0)));
-        }
-        Collections.sort(cardNumbers);
+        List<Integer> cardNumbers = cards.stream().map(card -> transformToNumber(card.charAt(0)))
+                .sorted().collect(Collectors.toList());
         int min = cardNumbers.get(0);
         for (int i = 1; i < cardNumbers.size(); i++) {
             if (cardNumbers.get(i) != ++min) {
@@ -135,21 +115,19 @@ public class PokerHands {
     }
 
     public int transformToNumber(char character) {
-        if (character == 'T') {
-            return 10;
+        switch (character) {
+            case 'T':
+                return 10;
+            case 'J':
+                return 11;
+            case 'Q':
+                return 12;
+            case 'K':
+                return 13;
+            case 'A':
+                return 14;
+            default:
+                return character - '0';
         }
-        if (character == 'J') {
-            return 11;
-        }
-        if (character == 'Q') {
-            return 12;
-        }
-        if (character == 'K') {
-            return 13;
-        }
-        if (character == 'A') {
-            return 14;
-        }
-        return character - '0';
     }
 }
