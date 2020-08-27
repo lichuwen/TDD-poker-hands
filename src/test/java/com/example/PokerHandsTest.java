@@ -121,7 +121,7 @@ public class PokerHandsTest {
         String result = pokerHands.play(Arrays.asList(white.split(" ")),
                 Arrays.asList(black.split(" ")));
         //then
-        assertEquals(result, PokerHands.WHITE);
+        assertEquals(result, PokerHands.BLACK);
     }
 
     @Test

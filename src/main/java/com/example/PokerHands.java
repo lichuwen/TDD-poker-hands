@@ -32,8 +32,20 @@ public class PokerHands {
         List<Integer> blackCardNum = generateCardNumberList(blackCards);
         List<Map.Entry<Integer, Long>> whiteNumberList = generateCardMap(whiteCardNum);
         List<Map.Entry<Integer, Long>> blackNumberList = generateCardMap(blackCardNum);
-        whiteNumberList.sort((o1, o2) -> o2.getValue().compareTo(o1.getValue()));
-        blackNumberList.sort((o1, o2) -> o2.getValue().compareTo(o1.getValue()));
+        whiteNumberList.sort((o1, o2) -> {
+            int compare = o2.getValue().compareTo(o1.getValue());
+            if (compare == 0) {
+                return o2.getKey().compareTo(o1.getKey());
+            }
+            return compare;
+        });
+        blackNumberList.sort((o1, o2) -> {
+            int compare = o2.getValue().compareTo(o1.getValue());
+            if (compare == 0) {
+                return o2.getKey().compareTo(o1.getKey());
+            }
+            return compare;
+        });
         String whiteNum = whiteNumberList.stream().map(Map.Entry::getKey)
                 .map(String::valueOf).collect(Collectors.joining(""));
         String blackNum = blackNumberList.stream().map(Map.Entry::getKey)
