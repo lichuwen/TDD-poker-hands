@@ -1,6 +1,7 @@
 package com.example;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -8,7 +9,7 @@ import java.util.stream.Collectors;
 /**
  * @author xhz
  */
-public class PokerHands {
+public class PokerHands implements Comparator<Map.Entry<Integer, Long>> {
 
     public static final String WHITE = "white";
     public static final String BLACK = "black";
@@ -32,20 +33,8 @@ public class PokerHands {
         List<Integer> blackCardNum = generateCardNumberList(blackCards);
         List<Map.Entry<Integer, Long>> whiteNumberList = generateCardMap(whiteCardNum);
         List<Map.Entry<Integer, Long>> blackNumberList = generateCardMap(blackCardNum);
-        whiteNumberList.sort((o1, o2) -> {
-            int compare = o2.getValue().compareTo(o1.getValue());
-            if (compare == 0) {
-                return o2.getKey().compareTo(o1.getKey());
-            }
-            return compare;
-        });
-        blackNumberList.sort((o1, o2) -> {
-            int compare = o2.getValue().compareTo(o1.getValue());
-            if (compare == 0) {
-                return o2.getKey().compareTo(o1.getKey());
-            }
-            return compare;
-        });
+        whiteNumberList.sort(this);
+        blackNumberList.sort(this);
         String whiteNum = whiteNumberList.stream().map(Map.Entry::getKey)
                 .map(String::valueOf).collect(Collectors.joining(""));
         String blackNum = blackNumberList.stream().map(Map.Entry::getKey)
@@ -141,5 +130,14 @@ public class PokerHands {
             default:
                 return character - '0';
         }
+    }
+
+    @Override
+    public int compare(Map.Entry<Integer, Long> o1, Map.Entry<Integer, Long> o2) {
+        int compare = o2.getValue().compareTo(o1.getValue());
+        if (compare == 0) {
+            return o2.getKey().compareTo(o1.getKey());
+        }
+        return compare;
     }
 }
