@@ -57,6 +57,6 @@ class PokerHand:
             return CardType.TwoPair
         if len(cardNumCounter) == 5:
             return CardType.HighCard
-        return False
+        return CardType.Pair
 
     
