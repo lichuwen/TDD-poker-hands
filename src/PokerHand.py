@@ -7,6 +7,12 @@ from collections import Counter
 CardType = Enum('CardType', ('HighCard', 'Pair', 'TwoPair', 'ThreeOfAKind', 'Straight', 'Flush', 'FullHouse', 'FourOfAKind', 'StraightFlush'))
 switch = {'T':10, 'J':11, 'Q':12, 'K':13, 'A': 14}
 
+TWO_PAIR_SIZE = 3
+HIGH_CARD_SIZE = 5
+FOUR_OF_KIND_SIZE = 4
+FULL_OF_HOUSE_SIZE = 2
+THREE_OF_KIND_SIZE = 3
+
 class PokerHand:
 
     def __init__(self):
@@ -45,17 +51,17 @@ class PokerHand:
             return CardType.StraightFlush
         cardNumCounter = Counter(self.getNumber(cards))
         for key,value in cardNumCounter.items():
-            if value == 4:
+            if value == FOUR_OF_KIND_SIZE:
                 return CardType.FourOfAKind
-            elif value == 3:
-                if len(cardNumCounter) == 2:
+            elif value == THREE_OF_KIND_SIZE:
+                if len(cardNumCounter) == FULL_OF_HOUSE_SIZE:
                     return CardType.FullHouse
                 return CardType.ThreeOfAKind
         if self.isFlush(cards):
             return CardType.Flush
-        if len(cardNumCounter) == 3:
+        if len(cardNumCounter) == TWO_PAIR_SIZE:
             return CardType.TwoPair
-        if len(cardNumCounter) == 5:
+        if len(cardNumCounter) == HIGH_CARD_SIZE:
             return CardType.HighCard
         return CardType.Pair
 
