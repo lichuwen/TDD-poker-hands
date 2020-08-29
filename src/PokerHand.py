@@ -38,6 +38,8 @@ class PokerHand:
             if value == 4:
                 return CardType.FourOfAKind
             elif value == 3:
+                if len(cardNumCounter) == 2:
+                    return CardType.FullHouse
                 return CardType.ThreeOfAKind
         return False
 
