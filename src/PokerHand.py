@@ -6,6 +6,7 @@ from collections import Counter
 
 CardType = Enum('CardType', ('HighCard', 'Pair', 'TwoPair', 'ThreeOfAKind', 'Straight', 'Flush', 'FullHouse', 'FourOfAKind', 'StraightFlush'))
 
+
 class PokerHand:
 
     def __init__(self):
@@ -26,6 +27,9 @@ class PokerHand:
             if (cardNum[i]+1 != min):
                 return False
         return True
+
+    def isFlush(cards):
+
 
     def generateCardType(self,cards):
         if self.isStraight(cards):

@@ -33,5 +33,10 @@ class PokerHandTest(unittest.TestCase):
            cardType = pokerHand.generateCardType(cards.split())
            self.assertEqual(cardType, CardType.FullHouse)
 
+    def test_should_return_flush_type_when_generate_card_type_given_2H3H5H9HKH(self):
+           cards = "2H 3H 5H 9H KH"
+           cardType = pokerHand.generateCardType(cards.split())
+           self.assertEqual(cardType, CardType.Flush)
+
 if __name__ == '__main__':
     unittest.main()
