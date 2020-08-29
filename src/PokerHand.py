@@ -53,6 +53,8 @@ class PokerHand:
                 return CardType.ThreeOfAKind
         if self.isFlush(cards):
             return CardType.Flush
+        if len(cardNumCounter) == 3:
+            return CardType.TwoPair
         return False
 
     
