@@ -6,8 +6,8 @@ import unittest
 
 class PokerHandTest(unittest.TestCase):
 
-    def test_should_return_straight_type_when_generate_card_type_given_2H3D5S9CKD(self):
-        cards = "2H 3D 5S 9C KD"
+    def test_should_return_straight_type_when_generate_card_type_given_3H4D5S6C7D(self):
+        cards = "3H 4D 5S 6C 7D"
         cardType = PokerHand.generateCardType(cards.split())
         self.assertEqual(cardType, CardType.Straight)
 
