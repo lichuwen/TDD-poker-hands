@@ -37,6 +37,8 @@ class PokerHand:
         for key,value in cardNumCounter.items():
             if value == 4:
                 return CardType.FourOfAKind
+            elif value == 3:
+                return CardType.ThreeOfAKind
         return False
 
     
