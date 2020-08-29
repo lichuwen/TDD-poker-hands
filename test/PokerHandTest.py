@@ -48,5 +48,10 @@ class PokerHandTest(unittest.TestCase):
            cardType = pokerHand.generateCardType(cards.split())
            self.assertEqual(cardType, CardType.HighCard)
 
+    def test_should_return_pair_type_when_generate_card_type_given_3A3D5STCKD(self):
+           cards = "3A 3D 5S TC KD"
+           cardType = pokerHand.generateCardType(cards.split())
+           self.assertEqual(cardType, CardType.Pair)
+
 if __name__ == '__main__':
     unittest.main()
