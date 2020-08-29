@@ -5,7 +5,7 @@ from enum import Enum
 from collections import Counter
 
 CardType = Enum('CardType', ('HighCard', 'Pair', 'TwoPair', 'ThreeOfAKind', 'Straight', 'Flush', 'FullHouse', 'FourOfAKind', 'StraightFlush'))
-
+switch = {'T':10, 'J':11, 'Q':12, 'K':13, 'A': 14}
 
 class PokerHand:
 
@@ -15,7 +15,10 @@ class PokerHand:
     def getNumber(self,cards):
         cardNum = []
         for i in range(len(cards)):
-            cardNum.append(cards[i][0])
+            if switch.__contains__(cards[i][0]):
+                cardNum.append(switch[cards[i][0]])
+            else:
+                cardNum.append(cards[i][0])
         cardNum = list(map(int, cardNum))
         return cardNum
 
@@ -28,8 +31,11 @@ class PokerHand:
                 return False
         return True
 
-    def isFlush(cards):
-
+    def isFlush(self,cards):
+        for i in range(len(cards)-1):
+            if (cards[i][1] != cards[i+1][1]):
+                return False
+        return True
 
     def generateCardType(self,cards):
         if self.isStraight(cards):
@@ -45,6 +51,8 @@ class PokerHand:
                 if len(cardNumCounter) == 2:
                     return CardType.FullHouse
                 return CardType.ThreeOfAKind
+        if self.isFlush(cards):
+            return CardType.Flush
         return False
 
     
