@@ -55,6 +55,8 @@ class PokerHand:
             return CardType.Flush
         if len(cardNumCounter) == 3:
             return CardType.TwoPair
+        if len(cardNumCounter) == 5:
+            return CardType.HighCard
         return False
 
     
