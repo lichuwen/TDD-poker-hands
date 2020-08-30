@@ -44,5 +44,7 @@ class PokerHand:
 
         if whiteCardByKey < blackCardByKey:
             return BLACK
-
-        return WHITE
+        elif whiteCardByKey > blackCardByKey:
+            return WHITE
+        else:
+            return TIE

@@ -40,6 +40,18 @@ class PokerHandTest(unittest.TestCase):
         winner = pokerHand.playCard(white.split(), black.split())
         self.assertEqual(winner, "black")
 
+    def test_should_return_black_when_play_card_with_three_of_a_kind_given_3H3D3D5S9C_and_5S4D4D9C4H(self):
+        white = "3H 3D 3D 5S 9C"
+        black = "5S 4D 4D 9C 4H"
+        winner = pokerHand.playCard(white.split(), black.split())
+        self.assertEqual(winner, "black")
+
+    def test_should_return_black_when_play_card_with_three_of_a_kind_given_5S9C3H3D3C_and_9CAS3H3D3C(self):
+        white = "5S 9C 3H 3D 3C"
+        black = "9C AS 3H 3D 3C"
+        winner = pokerHand.playCard(white.split(), black.split())
+        self.assertEqual(winner, "black")
+
 
 if __name__ == '__main__':
     unittest.main()
