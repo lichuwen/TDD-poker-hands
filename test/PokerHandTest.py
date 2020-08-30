@@ -60,7 +60,7 @@ class PokerHandTest(unittest.TestCase):
 
     def test_should_return_black_when_play_card_with_flush_given_2H3H5H9HTH_and_2H3H6STHKH(self):
         white = "2H 3H 5H 9H TH"
-        black = "2H 3H 6S TH KH"
+        black = "2H 3H 6H TH KH"
         winner = pokerHand.playCard(white.split(), black.split())
         self.assertEqual(winner, "black")
 

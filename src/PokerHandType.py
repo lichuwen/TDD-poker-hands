@@ -15,13 +15,6 @@ FULL_OF_HOUSE_SIZE = 2
 THREE_OF_KIND_SIZE = 3
 
 
-# whiteCardType = pokerHand.generateCardType(whiteCards)
-#         blackCarType = pokerHand.generateCardType(blackCards)
-#         if whiteCardType.value > blackCarType.value
-#             return WHITE
-#         elif whiteCardType.value < blackCarType.value
-#             return BLACK
-
 class PokerHandType:
 
     def __init__(self):

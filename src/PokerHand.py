@@ -33,6 +33,15 @@ class PokerHand:
         pass
 
     def playCard(self, whiteCards, blackCards):
+
+        whiteCardType = pokerHand.generateCardType(whiteCards)
+        blackCarType = pokerHand.generateCardType(blackCards)
+
+        if whiteCardType.value > blackCarType.value:
+            return WHITE
+        elif whiteCardType.value < blackCarType.value:
+            return BLACK
+
         whiteCounter = Counter(pokerHand.getNumber(whiteCards))
         blackCounter = Counter(pokerHand.getNumber(blackCards))
 
