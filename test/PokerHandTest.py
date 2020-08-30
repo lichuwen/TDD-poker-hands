@@ -94,6 +94,12 @@ class PokerHandTest(unittest.TestCase):
         winner = pokerHand.playCard(white.split(), black.split())
         self.assertEqual(winner, "black")
 
+    def test_should_return_white_when_play_card_with_different_type_given_3H4H5H6H7H_and_4H5D6S7C8D(self):
+        white = "3H 4H 5H 6H 7H"
+        black = "4H 5D 6S 7C 8D"
+        winner = pokerHand.playCard(white.split(), black.split())
+        self.assertEqual(winner, "white")
+
 
 if __name__ == '__main__':
     unittest.main()
