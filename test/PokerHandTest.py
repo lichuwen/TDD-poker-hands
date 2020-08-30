@@ -100,6 +100,12 @@ class PokerHandTest(unittest.TestCase):
         winner = pokerHand.playCard(white.split(), black.split())
         self.assertEqual(winner, "white")
 
+    def test_should_return_tie_when_play_card_with_high_card_type_given_2H3D5S9CKD_and_2D3H5C9SKH(self):
+        white = "2H 3D 5S 9C KD"
+        black = "2D 3H 5C 9S KH"
+        winner = pokerHand.playCard(white.split(), black.split())
+        self.assertEqual(winner, "tie")
+
 
 if __name__ == '__main__':
     unittest.main()
