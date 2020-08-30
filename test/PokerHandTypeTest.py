@@ -1,12 +1,12 @@
 import sys
-sys.path.append(r'/Users/lichuwen/BootCamp/TDD-poker-hands') # TODO: Should update your project root dir location
-from src.PokerHand import PokerHand,CardType
+sys.path.append(r'/Users/lichuwen/BootCamp/TDD-poker-hands')
+from src.PokerHandType import PokerHandType,CardType
 
 import unittest
 
-pokerHand = PokerHand()
+pokerHand = PokerHandType()
 
-class PokerHandTest(unittest.TestCase):
+class PokerHandTypeTest(unittest.TestCase):
 
     def test_should_return_straight_type_when_generate_card_type_given_3H4D5S6C7D(self):
         cards = "3H 4D 5S 6C 7D"

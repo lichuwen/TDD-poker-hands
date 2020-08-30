@@ -1,6 +1,5 @@
 import sys
 sys.path.append(r'/Users/lichuwen/BootCamp/TDD-poker-hands')
-from src.CardType import CardType
 from enum import Enum
 from collections import Counter
 
@@ -13,7 +12,11 @@ FOUR_OF_KIND_SIZE = 4
 FULL_OF_HOUSE_SIZE = 2
 THREE_OF_KIND_SIZE = 3
 
-class PokerHand:
+BLACK = "black"
+WHITE = "white"
+TIE = "tie"
+
+class PokerHandType:
 
     def __init__(self):
         pass
@@ -64,5 +67,8 @@ class PokerHand:
         if len(cardNumCounter) == HIGH_CARD_SIZE:
             return CardType.HighCard
         return CardType.Pair
+
+#     def playCard(self,whiteCards,blackCards):
+
 
     
