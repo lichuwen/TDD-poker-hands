@@ -12,10 +12,6 @@ FOUR_OF_KIND_SIZE = 4
 FULL_OF_HOUSE_SIZE = 2
 THREE_OF_KIND_SIZE = 3
 
-BLACK = "black"
-WHITE = "white"
-TIE = "tie"
-
 class PokerHandType:
 
     def __init__(self):
