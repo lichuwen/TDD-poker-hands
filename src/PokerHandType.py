@@ -1,10 +1,12 @@
 import sys
+
 sys.path.append(r'/Users/lichuwen/BootCamp/TDD-poker-hands')
 from enum import Enum
 from collections import Counter
 
-CardType = Enum('CardType', ('HighCard', 'Pair', 'TwoPair', 'ThreeOfAKind', 'Straight', 'Flush', 'FullHouse', 'FourOfAKind', 'StraightFlush'))
-switch = {'T':10, 'J':11, 'Q':12, 'K':13, 'A': 14}
+CardType = Enum('CardType', (
+    'HighCard', 'Pair', 'TwoPair', 'ThreeOfAKind', 'Straight', 'Flush', 'FullHouse', 'FourOfAKind', 'StraightFlush'))
+switch = {'T': 10, 'J': 11, 'Q': 12, 'K': 13, 'A': 14}
 
 TWO_PAIR_SIZE = 3
 HIGH_CARD_SIZE = 5
@@ -12,12 +14,20 @@ FOUR_OF_KIND_SIZE = 4
 FULL_OF_HOUSE_SIZE = 2
 THREE_OF_KIND_SIZE = 3
 
+
+# whiteCardType = pokerHand.generateCardType(whiteCards)
+#         blackCarType = pokerHand.generateCardType(blackCards)
+#         if whiteCardType.value > blackCarType.value
+#             return WHITE
+#         elif whiteCardType.value < blackCarType.value
+#             return BLACK
+
 class PokerHandType:
 
     def __init__(self):
         pass
 
-    def getNumber(self,cards):
+    def getNumber(self, cards):
         cardNum = []
         for i in range(len(cards)):
             if switch.__contains__(cards[i][0]):
@@ -27,29 +37,29 @@ class PokerHandType:
         cardNum = list(map(int, cardNum))
         return cardNum
 
-    def isStraight(self,cards):
+    def isStraight(self, cards):
         cardNum = self.getNumber(cards)
         min = cardNum[0]
         for i in range(len(cardNum)):
             min += 1
-            if (cardNum[i]+1 != min):
+            if cardNum[i] + 1 != min:
                 return False
         return True
 
-    def isFlush(self,cards):
-        for i in range(len(cards)-1):
-            if (cards[i][1] != cards[i+1][1]):
+    def isFlush(self, cards):
+        for i in range(len(cards) - 1):
+            if cards[i][1] != cards[i + 1][1]:
                 return False
         return True
 
-    def generateCardType(self,cards):
+    def generateCardType(self, cards):
         if self.isStraight(cards):
-            for i in range(len(cards)-1):
-                if cards[i][1] != cards[i+1][1]:
+            for i in range(len(cards) - 1):
+                if cards[i][1] != cards[i + 1][1]:
                     return CardType.Straight
             return CardType.StraightFlush
         cardNumCounter = Counter(self.getNumber(cards))
-        for key,value in cardNumCounter.items():
+        for key, value in cardNumCounter.items():
             if value == FOUR_OF_KIND_SIZE:
                 return CardType.FourOfAKind
             elif value == THREE_OF_KIND_SIZE:
@@ -63,6 +73,3 @@ class PokerHandType:
         if len(cardNumCounter) == HIGH_CARD_SIZE:
             return CardType.HighCard
         return CardType.Pair
-
-
-    
